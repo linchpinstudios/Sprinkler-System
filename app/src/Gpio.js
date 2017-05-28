@@ -5,9 +5,10 @@ const chipio = require('chip-io');
 
 class Gpio {
 
-  pins = []
-
   constructor() {
+
+    this.pins = []
+
     this.board = new five.Board({
       io: new chipio(),
       pins: [

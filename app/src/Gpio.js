@@ -22,7 +22,7 @@ class Gpio {
     this.board = new five.Board({
       io: new chipio(),
     });
-    this.board.on('ready', this.handleBoardReady.bind(self))
+    this.board.on('ready', this.handleBoardReady.bind(this))
   }
 
   //////////////
@@ -50,12 +50,12 @@ class Gpio {
 
   on( pin ) {
     let gpio = this.getPin( pin )
-    gpio.off()
+    if (this.ready) gpio.off()
   }
 
   off( pin ) {
     let gpio = this.getPin( pin )
-    gpio.on()
+    if (this.ready) gpio.on()
   }
 
   //////////////

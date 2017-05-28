@@ -37,7 +37,7 @@ class Gpio {
 
   off( pin ) {
     let gpio = this.getPin( pin )
-    gpio.off()
+    gpio.on()
   }
 
 }

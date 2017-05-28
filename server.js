@@ -12,10 +12,36 @@
 */
 
 global.five = require('johnny-five');
-var chipio = require('../index'); // or require('chip-io');
+var chipio = require('chip-io');
 
 var board = new five.Board({
-  io: new chipio()
+  io: new chipio(),
+  pins: [
+    {
+      value: 0,
+      pin: 'XIO-P0'
+    },
+    {
+      value: 0,
+      pin: 'XIO-P1'
+    },
+    {
+      value: 0,
+      pin: 'XIO-P2'
+    },
+    {
+      value: 0,
+      pin: 'XIO-P3'
+    },
+    {
+      value: 0,
+      pin: 'XIO-P4'
+    },
+    {
+      value: 0,
+      pin: 'XIO-P5'
+    },
+  ]
 });
 
 const http = require('./bootstrap/http')

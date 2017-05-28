@@ -19,7 +19,8 @@ const Route = use('Route')
 
 Route.group('API', function() {
   Route.get('sprinklers', 'Api/SprinklersController.index')
-  Route.get('sprinklers/:id', 'Api/SprinklersController.start')
+  Route.get('sprinklers/:id/start', 'Api/SprinklersController.start')
+  Route.get('sprinklers/:id/stop', 'Api/SprinklersController.stop')
   Route.get('schedules', 'Api/ScheduleController.index')
   Route.get('schedules/test', 'Api/ScheduleController.schedule')
 }).prefix('api')

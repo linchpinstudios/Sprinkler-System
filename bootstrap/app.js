@@ -31,6 +31,7 @@ const providers = [
   'adonis-auth/providers/AuthManagerProvider',
   'adonis-websocket/providers/WsProvider',
   'adonis-scheduler/providers/SchedulerProvider'
+  'adonis/providers/GpioProvider'
 ]
 
 /*

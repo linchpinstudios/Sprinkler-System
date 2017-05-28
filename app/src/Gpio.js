@@ -6,21 +6,39 @@ const chipio = require('chip-io');
 class Gpio {
 
   constructor() {
+    this.ready = false
+
+    this.pinAddress = [
+      'XIO-P0',
+      'XIO-P1',
+      'XIO-P2',
+      'XIO-P3',
+      'XIO-P4',
+      'XIO-P5',
+    ];
 
     this.pins = []
 
     this.board = new five.Board({
       io: new chipio(),
-      pins: [
-        {value: 1, pin: 'XIO-P0'},
-        {value: 1, pin: 'XIO-P1'},
-        {value: 1, pin: 'XIO-P2'},
-        {value: 1, pin: 'XIO-P3'},
-        {value: 1, pin: 'XIO-P4'},
-        {value: 1, pin: 'XIO-P5'},
-      ]
     });
+    this.board.on('ready', this.handleBoardReady.bind(self))
   }
+
+  //////////////
+  // SETTERS  //
+  //////////////
+  setPinDefault() {
+
+    this.pinAddress.forEach((item) => {
+      this.off( item )
+    })
+
+  }
+
+  //////////////////
+  // Control Pins //
+  //////////////////
 
   getPin( pin ) {
     if ( this.pins[pin] ) return this.pins[pin]
@@ -38,6 +56,16 @@ class Gpio {
   off( pin ) {
     let gpio = this.getPin( pin )
     gpio.on()
+  }
+
+  //////////////
+  // HANDLERS //
+  //////////////
+
+  handleBoardReady() {
+    this.ready = true;
+
+    this.setPinDefault()
   }
 
 }

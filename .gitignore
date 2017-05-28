@@ -27,3 +27,11 @@ lib-cov
 
 # Nuxt.js
 .nuxt/
+
+
+.vagrant
+CHIP-tools
+CHIP-Flasher
+CHIP-buildroot
+sunxi-tools
+chip-mtd-utils

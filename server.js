@@ -11,6 +11,13 @@
 |
 */
 
+global.five = require('johnny-five');
+var chipio = require('../index'); // or require('chip-io');
+
+var board = new five.Board({
+  io: new chipio()
+});
+
 const http = require('./bootstrap/http')
 http(function () {
   use('Event').fire('Http.start')

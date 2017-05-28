@@ -1,6 +1,7 @@
 'use strict'
 
 const Sprinkler = use('App/Model/Sprinkler')
+const Gpio = use('Adonis/Src/Gpio')
 
 class SprinklersController {
 
@@ -13,8 +14,7 @@ class SprinklersController {
     const id = request.param('id')
     const sprinklers = yield Sprinkler.find(id)
 
-    var led = new global.five.Led(sprinklers.pin);
-    led.off()
+    new Gpio.on(sprinklers.pin);
 
     response.json( sprinklers )
   }
@@ -23,8 +23,7 @@ class SprinklersController {
     const id = request.param('id')
     const sprinklers = yield Sprinkler.find(id)
 
-    var led = new global.five.Led(sprinklers.pin);
-    led.on()
+    new Gpio.off(sprinklers.pin);
 
     response.json( sprinklers )
   }

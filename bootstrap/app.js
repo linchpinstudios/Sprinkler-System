@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path');
+
 /*
 |--------------------------------------------------------------------------
 | Application Providers
@@ -30,8 +32,8 @@ const providers = [
   'adonis-middleware/providers/AppMiddlewareProvider',
   'adonis-auth/providers/AuthManagerProvider',
   'adonis-websocket/providers/WsProvider',
-  'adonis-scheduler/providers/SchedulerProvider'
-  'adonis/providers/GpioProvider'
+  'adonis-scheduler/providers/SchedulerProvider',
+  path.join(__dirname,'../providers/GpioProvider.js')
 ]
 
 /*

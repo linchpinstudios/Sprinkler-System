@@ -31,6 +31,7 @@ module.exports = function (callback) {
       */
       fold.Ioc.aliases(app.aliases)
 
+      const GPIO = use('Adonis/Src/Gpio')
       /*
       |--------------------------------------------------------------------------
       | Register Package File

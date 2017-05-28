@@ -14,7 +14,7 @@ class SprinklersController {
     const id = request.param('id')
     const sprinklers = yield Sprinkler.find(id)
 
-    new Gpio.on(sprinklers.pin);
+    Gpio.on(sprinklers.pin);
 
     response.json( sprinklers )
   }
@@ -23,7 +23,7 @@ class SprinklersController {
     const id = request.param('id')
     const sprinklers = yield Sprinkler.find(id)
 
-    new Gpio.off(sprinklers.pin);
+    Gpio.off(sprinklers.pin);
 
     response.json( sprinklers )
   }

@@ -25,7 +25,7 @@
     "adonis-scheduler": "^2.1.2",
     "adonis-websocket": "^1.0.2",
     "chip-gpio": "^1.1.2",
-    "chip-io": "^2.1.1",
+    "chip-io": "https://github.com/linchpinstudios/node-chip-io/tarball/93d966ada0da228643b343a3a0f0cfd2b59df10b",
     "cross-env": "^3.1.4",
     "johnny-five": "^0.10.13",
     "moment-timezone": "^0.5.13",

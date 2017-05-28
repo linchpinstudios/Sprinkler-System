@@ -12,7 +12,7 @@ class SprinklersSeeder {
     for(let i = 0; i < 6; i++) {
       sprinklers.push({
         name: `Bank ${i + 1}`,
-        pin: `XIO-P${i}`
+        pin: 'XIO-P${i}`
       })
     }
     yield Sprinkler.createMany(sprinklers)

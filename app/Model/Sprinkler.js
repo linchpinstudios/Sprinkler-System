@@ -1,8 +1,8 @@
 'use strict'
 
 const Lucid = use('Lucid')
-const five = require('johnny-five');
-const chipio = require('chip-io');
+// const five = require('johnny-five');
+// const chipio = require('chip-io');
 
 class Sprinkler extends Lucid {
 
@@ -11,15 +11,15 @@ class Sprinkler extends Lucid {
   }
 
   setupGpio() {
-    return new Promise(resolve => {
-      if (this.board) resolve()
-      this.board = new five.Board({
-        io: new chipio()
-      });
-      this.board.on('ready', () => {
-        resolve()
-      })
-    })
+    // return new Promise(resolve => {
+    //   if (this.board) resolve()
+    //   this.board = new five.Board({
+    //     io: new chipio()
+    //   });
+    //   this.board.on('ready', () => {
+    //     resolve()
+    //   })
+    // })
   }
 
   turnOn() {

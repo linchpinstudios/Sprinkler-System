@@ -16,7 +16,7 @@ class SprinklersController {
 
     // Gpio.value(sprinklers.pin);
 
-    response.json( Gpio.value(sprinklers.pin) )
+    response.json( Gpio.status(sprinklers.pin) )
   }
 
   * start(request, response) {

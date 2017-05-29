@@ -43,6 +43,7 @@ class CheckSchedule {
     startStop.forEach((sprinklerSchedule) => {
       let sprinkler;
 
+      console.log(sprinklerSchedule.start, now)
       if ( sprinklerSchedule.start == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
         console.log('Start Sprinkler:')

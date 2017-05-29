@@ -29,7 +29,7 @@ class CheckSchedule {
     })
 
     runningToday.forEach((schedule) => {
-      var lastTime = moment(schedule.start, 'hmm').tz("America/Los_Angeles")
+      var lastTime = moment().tz(schedule.start, 'hmm', "America/Los_Angeles")
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
         startStop.push({

@@ -1,5 +1,3 @@
-'use strict';
-
 const Schedule = use('App/Model/Schedule')
 const Sprinkler = use('App/Model/Sprinkler')
 const moment = require('moment-timezone')
@@ -43,7 +41,7 @@ class CheckSchedule {
     })
 
     startStop.forEach((sprinklerSchedule) => {
-      let sprinkler;
+      let sprinkler
 
       if ( sprinklerSchedule.start == now ) {
         sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler );

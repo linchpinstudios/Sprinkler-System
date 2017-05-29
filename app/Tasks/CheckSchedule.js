@@ -18,7 +18,7 @@ class CheckSchedule {
     const schedules = yield Schedule.query().with('sprinklers').fetch()
 
     let day = moment.tz("America/Los_Angeles").format('dddd')
-    let now = moment.tz("America/Los_Angeles").format('hmm')
+    let now = moment.tz("America/Los_Angeles").format('Hmm')
     let runningToday = []
     let startStop = []
 

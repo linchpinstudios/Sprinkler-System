@@ -2,6 +2,7 @@
 
 const Schedule = use('App/Model/Schedule')
 const moment = require('moment-timezone')
+const Gpio = use('Adonis/Src/Gpio')
 
 class CheckSchedule {
 
@@ -45,10 +46,10 @@ class CheckSchedule {
 
       if ( sprinklerSchedule.start == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-        if ( sprinkler.enabled ) sprinkler.turnOn()
+        if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
       } else if ( sprinklerSchedule.end == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-        sprinkler.turnOff()
+         Gpio.off(sprinklers.pin)
       }
     })
   }

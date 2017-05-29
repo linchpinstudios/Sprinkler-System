@@ -1,6 +1,7 @@
 'use strict';
 
 const Schedule = use('App/Model/Schedule')
+const Sprinkler = use('App/Model/Sprinkler')
 const moment = require('moment-timezone')
 const Gpio = use('Adonis/Src/Gpio')
 
@@ -44,14 +45,13 @@ class CheckSchedule {
     startStop.forEach((sprinklerSchedule) => {
       let sprinkler;
 
-      console.log(sprinklerSchedule.start, now)
       if ( sprinklerSchedule.start == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-        console.log('Start Sprinkler:')
-        console.log(sprinkler)
+        console.log('Start Sprinkler:', sprinkler.id)
         if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
       } else if ( sprinklerSchedule.end == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
+        console.log('Stop Sprinkler:', sprinkler.id)
         Gpio.off(sprinklers.pin)
       }
     })

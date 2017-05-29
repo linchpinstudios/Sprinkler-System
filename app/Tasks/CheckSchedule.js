@@ -51,8 +51,6 @@ class CheckSchedule {
         sprinkler.turnOff()
       }
     })
-
-    response.json(startStop)
   }
 
 }

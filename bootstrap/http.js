@@ -92,6 +92,9 @@ module.exports = function (callback) {
       */
       use(Helpers.databasePath('factory'))
 
+      const Scheduler = use('Adonis/Addons/Scheduler')
+      Scheduler.run()
+
       /*
       |--------------------------------------------------------------------------
       | Start Http Server

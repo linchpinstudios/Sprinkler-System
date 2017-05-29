@@ -11,7 +11,7 @@ class CheckSchedule {
   // More docs here: https://github.com/node-schedule/node-schedule#cron-style-scheduling
   static get schedule() {
     // once every minute
-    return '*/10 * * * * *';
+    return '*/1 * * * *';
   }
 
   // This is the function that is called at the defined schedule
@@ -22,8 +22,6 @@ class CheckSchedule {
     let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
     let runningToday = []
     let startStop = []
-
-    console.log('Checking', now)
 
     schedules.forEach((schedule) => {
       if ( schedule.enabled && schedule[day.toLowerCase()] ) {
@@ -48,10 +46,10 @@ class CheckSchedule {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)
 
       if( startStop[i].start == now && sprinkler.enabled ) {
-        console.log('Starting: ', sprinkler.id)
+        console.log('Starting: ', now, sprinkler.id)
         Gpio.on(sprinkler.pin)
       } else if ( startStop[i].end == now ) {
-        console.log('Stopping: ', sprinkler.id)
+        console.log('Stopping: ', now, sprinkler.id)
         Gpio.off( sprinkler.pin )
       }
     }

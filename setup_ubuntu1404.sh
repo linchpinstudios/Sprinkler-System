@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo -e "\n ADD YARN"
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 echo -e "\n Setting up environment in Ubuntu 14.04"
 sudo apt-get -y update
 sudo apt-get -y install \
@@ -26,7 +31,9 @@ sudo apt-get -y install \
  libacl1-dev \
  zlib1g-dev \
  liblzo2-dev \
- uuid-dev
+ uuid-dev \
+ nodejs \
+ yarn
 
 if uname -a |grep -q 64;
 then

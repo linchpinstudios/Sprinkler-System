@@ -3,6 +3,7 @@
 const Schedule = use('App/Model/Schedule')
 const Sprinkler = use('App/Model/Sprinkler')
 const moment = require('moment-timezone')
+const Gpio = use('Adonis/Src/Gpio')
 
 class ScheduleController {
 
@@ -13,7 +14,6 @@ class ScheduleController {
 
   * schedule(request, response) {
     const schedules = yield Schedule.query().where('enabled', 1).with('sprinklers').fetch()
-    const sprinklers = yield Sprinkler.all()
 
     let day = moment.tz("America/Los_Angeles").format('dddd')
     let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
@@ -39,14 +39,19 @@ class ScheduleController {
       })
     })
 
-    startStop.forEach((sprinklerSchedule) => {
-      console.log(sprinklers.find(sprinklerSchedule.sprinkler))
-      if ( sprinklerSchedule.start == now ) {
-        // if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
-      } else if ( sprinklerSchedule.end == now ) {
-        // Gpio.off( sprinklers.pin )
+    for( let i = 0; i < startStop.length; i++ ) {
+      let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)
+
+      if( startStop[i].start == now && sprinkler.enabled ) {
+        console.log('Starting: ', now, sprinkler.id)
+        Gpio.on(sprinkler.pin)
+      } else if ( startStop[i].end == now ) {
+        console.log('Stopping: ', now, sprinkler.id)
+        Gpio.off( sprinkler.pin )
       }
-    })
+    }
+
+    response.json( startStop )
   }
 
 }

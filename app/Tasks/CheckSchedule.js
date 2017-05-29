@@ -45,9 +45,13 @@ class CheckSchedule {
     startStop.forEach((sprinklerSchedule) => {
       console.log(sprinklerSchedule.start, now)
       if ( sprinklerSchedule.start == now ) {
-        this.startSprinkler( sprinklerSchedule.sprinkler )
+        let starter = this.startSprinkler( sprinklerSchedule.sprinkler )
+        starter.next()
+        starter.next()
       } else if ( sprinklerSchedule.end == now ) {
-        this.stopSprinkler( sprinklerSchedule.sprinkler )
+        let stopper = this.stopSprinkler( sprinklerSchedule.sprinkler )
+        stopper.next()
+        stopper.next()
       }
     })
   }

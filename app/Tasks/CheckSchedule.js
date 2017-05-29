@@ -45,10 +45,12 @@ class CheckSchedule {
     for( let i = 0; i < startStop.length; i++ ) {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)
 
-      if ( startStop[i].start == now ) {
-        if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
+      if( startStop[i].start == now && sprinkler.enabled ) {
+        console.log('Starting: ', sprinkler)
+        Gpio.on(sprinkler.pin)
       } else if ( startStop[i].end == now ) {
-        Gpio.off( sprinklers.pin )
+        console.log('Stopping: ', sprinkler)
+        Gpio.off( sprinkler.pin )
       }
     }
   }

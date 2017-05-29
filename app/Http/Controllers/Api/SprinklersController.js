@@ -10,6 +10,15 @@ class SprinklersController {
     response.json( sprinklers )
   }
 
+  * status(request, response) {
+    const id = request.param('id')
+    const sprinklers = yield Sprinkler.find(id)
+
+    // Gpio.value(sprinklers.pin);
+
+    response.json( Gpio.value(sprinklers.pin) )
+  }
+
   * start(request, response) {
     const id = request.param('id')
     const sprinklers = yield Sprinkler.find(id)

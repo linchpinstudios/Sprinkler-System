@@ -1,7 +1,7 @@
 'use strict';
 
 const Schedule = use('App/Model/Schedule')
-const Moment = require('moment')
+const moment = require('moment-timezone')
 
 class CheckSchedule {
 

@@ -46,11 +46,11 @@ class CheckSchedule {
       let sprinkler;
 
       if ( sprinklerSchedule.start == now ) {
-        sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
+        sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler );
         console.log('Start Sprinkler:', sprinkler.id)
         if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
       } else if ( sprinklerSchedule.end == now ) {
-        sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
+        sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler );
         console.log('Stop Sprinkler:', sprinkler.id)
         Gpio.off(sprinklers.pin)
       }

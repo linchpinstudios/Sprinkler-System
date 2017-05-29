@@ -1,3 +1,5 @@
+'use strict';
+
 const Schedule = use('App/Model/Schedule')
 const Sprinkler = use('App/Model/Sprinkler')
 const moment = require('moment-timezone')
@@ -41,19 +43,36 @@ class CheckSchedule {
     })
 
     startStop.forEach((sprinklerSchedule) => {
-      let sprinkler
-
       if ( sprinklerSchedule.start == now ) {
-        sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler );
-        console.log('Start Sprinkler:', sprinkler.id)
-        if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
+        this.startSprinkler( sprinklerSchedule.sprinkler )
       } else if ( sprinklerSchedule.end == now ) {
-        sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler );
-        console.log('Stop Sprinkler:', sprinkler.id)
-        Gpio.off(sprinklers.pin)
+        this.stopSprinkler( sprinklerSchedule.sprinkler )
       }
     })
   }
+
+  * startSprinkler( id ) {
+    const sprinkler = yield Sprinkler.find( id )
+    if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
+  }
+
+  * stopSprinkler( id ) {
+    const sprinkler = yield Sprinkler.find( id )
+    Gpio.off(sprinklers.pin)
+  }
+
+  // checkStartStop( sprinklerSchedule ) {
+  //   if ( sprinklerSchedule.start == this.now ) {
+  //     console.log(sprinklerSchedule.sprinkler)
+  //     const sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler )
+  //     console.log('Start Sprinkler:', sprinkler)
+  //     if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
+  //   } else if ( sprinklerSchedule.end == this.now ) {
+  //     const sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler )
+  //     console.log('Stop Sprinkler:', sprinkler)
+  //     Gpio.off(sprinklers.pin)
+  //   }
+  // }
 
 }
 

@@ -32,7 +32,6 @@ class CheckSchedule {
       var lastTime = moment(schedule.start, 'hmm').tz("America/Los_Angeles")
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
-        console.log(schedule.start, lastTime)
         startStop.push({
           sprinkler: sprinkler.id,
           start: lastTime.clone().format('hmm'),
@@ -46,10 +45,12 @@ class CheckSchedule {
 
       if ( sprinklerSchedule.start == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
+        console.log('Start Sprinkler:')
+        console.log(sprinkler)
         if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
       } else if ( sprinklerSchedule.end == now ) {
         sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-         Gpio.off(sprinklers.pin)
+        Gpio.off(sprinklers.pin)
       }
     })
   }

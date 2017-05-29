@@ -20,7 +20,7 @@ class Gpio {
     this.pins = []
 
     this.board = new five.Board({
-      io: new chipio(),
+      io: new chipio()
     });
     this.board.on('ready', this.handleBoardReady.bind(this))
   }

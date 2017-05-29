@@ -43,6 +43,7 @@ class CheckSchedule {
     })
 
     startStop.forEach((sprinklerSchedule) => {
+      console.log(sprinklerSchedule.start, now)
       if ( sprinklerSchedule.start == now ) {
         this.startSprinkler( sprinklerSchedule.sprinkler )
       } else if ( sprinklerSchedule.end == now ) {
@@ -53,11 +54,13 @@ class CheckSchedule {
 
   * startSprinkler( id ) {
     const sprinkler = yield Sprinkler.find( id )
+    console.log('starting: ', sprinkler)
     if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
   }
 
   * stopSprinkler( id ) {
     const sprinkler = yield Sprinkler.find( id )
+    console.log('stopping: ', sprinkler)
     Gpio.off(sprinklers.pin)
   }
 

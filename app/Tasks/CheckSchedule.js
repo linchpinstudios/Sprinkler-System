@@ -16,7 +16,7 @@ class CheckSchedule {
 
   // This is the function that is called at the defined schedule
   * handle() {
-    const schedules = yield Schedule.query().with('sprinklers').fetch()
+    const schedules = yield Schedule.query().where('enabled', 1).with('sprinklers').fetch()
 
     let day = moment.tz("America/Los_Angeles").format('dddd')
     let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
@@ -42,44 +42,16 @@ class CheckSchedule {
       })
     })
 
-    startStop.forEach((sprinklerSchedule) => {
-      console.log(sprinklerSchedule.start, now)
-      if ( sprinklerSchedule.start == now ) {
-        let starter = this.startSprinkler( sprinklerSchedule.sprinkler )
-        starter.next()
-        starter.next()
-      } else if ( sprinklerSchedule.end == now ) {
-        let stopper = this.stopSprinkler( sprinklerSchedule.sprinkler )
-        stopper.next()
-        stopper.next()
+    for( let i = 0; i < startStop.length; i++ ) {
+      let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)
+
+      if ( startStop[i].start == now ) {
+        if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
+      } else if ( startStop[i].end == now ) {
+        Gpio.off( sprinklers.pin )
       }
-    })
+    }
   }
-
-  * startSprinkler( id ) {
-    const sprinkler = yield Sprinkler.find( id )
-    console.log('starting: ', sprinkler)
-    if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
-  }
-
-  * stopSprinkler( id ) {
-    const sprinkler = yield Sprinkler.find( id )
-    console.log('stopping: ', sprinkler)
-    Gpio.off(sprinklers.pin)
-  }
-
-  // checkStartStop( sprinklerSchedule ) {
-  //   if ( sprinklerSchedule.start == this.now ) {
-  //     console.log(sprinklerSchedule.sprinkler)
-  //     const sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler )
-  //     console.log('Start Sprinkler:', sprinkler)
-  //     if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
-  //   } else if ( sprinklerSchedule.end == this.now ) {
-  //     const sprinkler = yield Sprinkler.find( sprinklerSchedule.sprinkler )
-  //     console.log('Stop Sprinkler:', sprinkler)
-  //     Gpio.off(sprinklers.pin)
-  //   }
-  // }
 
 }
 

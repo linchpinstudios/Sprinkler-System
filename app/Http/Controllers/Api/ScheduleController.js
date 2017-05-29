@@ -12,10 +12,11 @@ class ScheduleController {
   }
 
   * schedule(request, response) {
-    const schedules = yield Schedule.query().with('sprinklers').fetch()
+    const schedules = yield Schedule.query().where('enabled', 1).with('sprinklers').fetch()
+    const sprinklers = yield Sprinkler.all()
 
     let day = moment.tz("America/Los_Angeles").format('dddd')
-    let now = moment.tz("America/Los_Angeles").format('hmm')
+    let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
     let runningToday = []
     let startStop = []
 
@@ -26,30 +27,26 @@ class ScheduleController {
     })
 
     runningToday.forEach((schedule) => {
-      var lastTime = moment(schedule.start, 'hmm').tz("America/Los_Angeles")
+      var lastTime = schedule.start
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
-        console.log(schedule.start, lastTime)
         startStop.push({
           sprinkler: sprinkler.id,
-          start: lastTime.clone().format('hmm'),
-          end: lastTime.add(sprinkler._pivot_duration, 'minute').clone().format('hmm')
+          start: lastTime,
+          end: lastTime + sprinkler._pivot_duration
         })
+        lastTime = lastTime + sprinkler._pivot_duration
       })
     })
 
     startStop.forEach((sprinklerSchedule) => {
-      let sprinkler;
+      console.log(sprinklers.find(sprinklerSchedule.sprinkler))
       if ( sprinklerSchedule.start == now ) {
-        sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-        sprinkler.turnOn()
+        // if ( sprinkler.enabled ) Gpio.on(sprinklers.pin)
       } else if ( sprinklerSchedule.end == now ) {
-        sprinkler = Sprinkler.find( sprinklerSchedule.sprinkler );
-        sprinkler.turnOff()
+        // Gpio.off( sprinklers.pin )
       }
     })
-
-    response.json(startStop)
   }
 
 }

@@ -11,7 +11,7 @@ class CheckSchedule {
   // More docs here: https://github.com/node-schedule/node-schedule#cron-style-scheduling
   static get schedule() {
     // once every minute
-    return '*/1 * * * *';
+    return '* * * * *';
   }
 
   // This is the function that is called at the defined schedule
@@ -22,6 +22,8 @@ class CheckSchedule {
     let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
     let runningToday = []
     let startStop = []
+
+    console.log('Checking: ', now)
 
     schedules.forEach((schedule) => {
       if ( schedule.enabled && schedule[day.toLowerCase()] ) {

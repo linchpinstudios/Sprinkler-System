@@ -32,17 +32,18 @@ class CheckSchedule {
     })
 
     runningToday.forEach((schedule) => {
-      var lastTime = schedule.start
+      var lastTime = moment(schedule.start, 'Hmm')
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
         startStop.push({
           sprinkler: sprinkler.id,
-          start: lastTime,
-          end: lastTime + sprinkler._pivot_duration
+          start: parseInt(lastTime.format('Hmm')),
+          end: parseInt(lastTime.add(sprinkler._pivot_duration, 'minute').format('Hmm'))
         })
-        lastTime = lastTime + sprinkler._pivot_duration
       })
     })
+
+    console.log(startStop)
 
     for( let i = 0; i < startStop.length; i++ ) {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)

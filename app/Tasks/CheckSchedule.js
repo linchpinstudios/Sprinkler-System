@@ -22,6 +22,7 @@ class CheckSchedule {
     let now = parseInt(moment.tz("America/Los_Angeles").format('Hmm'))
     let runningToday = []
     let startStop = []
+    let killAll = {};
 
     console.log('Checking: ', now)
 
@@ -43,8 +44,6 @@ class CheckSchedule {
       })
     })
 
-    console.log(startStop)
-
     for( let i = 0; i < startStop.length; i++ ) {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)
 
@@ -56,6 +55,7 @@ class CheckSchedule {
         Gpio.off( sprinkler.pin )
       }
     }
+
   }
 
 }

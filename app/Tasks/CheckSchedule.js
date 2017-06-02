@@ -27,13 +27,10 @@ class CheckSchedule {
     console.log('Checking: ', now)
 
     schedules.forEach((schedule) => {
-      console.log(schedule.enabled, day.toLowerCase(), schedule[day.toLowerCase()])
       if ( schedule.enabled && schedule[day.toLowerCase()] ) {
         runningToday.push(schedule)
       }
     })
-
-    console.log('runningToday: ', runningToday)
 
     runningToday.forEach((schedule) => {
       var lastTime = moment(schedule.start, 'Hmm')
@@ -46,8 +43,6 @@ class CheckSchedule {
         })
       })
     })
-
-    console.log('Schedule: ', startStop)
 
     for( let i = 0; i < startStop.length; i++ ) {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)

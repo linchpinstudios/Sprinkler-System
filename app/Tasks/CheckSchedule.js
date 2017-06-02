@@ -27,16 +27,18 @@ class CheckSchedule {
     console.log('Checking: ', now)
 
     schedules.forEach((schedule) => {
+      console.log(schedule.enabled, day.toLowerCase(), schedule[day.toLowerCase()])
       if ( schedule.enabled && schedule[day.toLowerCase()] ) {
         runningToday.push(schedule)
       }
     })
 
+    console.log('runningToday: ', runningToday)
+
     runningToday.forEach((schedule) => {
       var lastTime = moment(schedule.start, 'Hmm')
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
-        console.log(lastTime)
         startStop.push({
           sprinkler: sprinkler.id,
           start: parseInt(lastTime.format('Hmm')),

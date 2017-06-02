@@ -36,6 +36,7 @@ class CheckSchedule {
       var lastTime = moment(schedule.start, 'Hmm')
 
       schedule.relations.sprinklers.forEach((sprinkler) => {
+        console.log(lastTime)
         startStop.push({
           sprinkler: sprinkler.id,
           start: parseInt(lastTime.format('Hmm')),
@@ -43,6 +44,8 @@ class CheckSchedule {
         })
       })
     })
+
+    console.log('Schedule: ', startStop)
 
     for( let i = 0; i < startStop.length; i++ ) {
       let sprinkler = yield Sprinkler.find(startStop[i].sprinkler)

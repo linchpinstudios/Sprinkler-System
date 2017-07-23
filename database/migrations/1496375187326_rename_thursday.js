@@ -6,13 +6,13 @@ class RenameThursdayTableSchema extends Schema {
 
   up () {
     this.table('schedules', (table) => {
-      table.rename('thrusday', 'thursday')
+      table.renameColumn('thrusday', 'thursday')
     })
   }
 
   down () {
     this.table('schedules', (table) => {
-      table.rename('thursday', 'thrusday')
+      table.renameColumn('thursday', 'thrusday')
     })
   }
 

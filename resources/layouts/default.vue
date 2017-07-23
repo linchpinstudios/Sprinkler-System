@@ -24,7 +24,7 @@ export default {
   text-align: center;
 }
 
-.button, .button:visited
+.button, .button:visited, .button.active
 {
   display: inline-block;
   color: #744d82;
@@ -47,6 +47,11 @@ export default {
   color: #505153;
   font-weight: 300;
   font-size: 2.5em;
-  margin: 0;
+  margin: 0 0 20px;
+}
+
+.logo {
+  max-width: 80%;
+  margin-bottom: 30px;
 }
 </style>

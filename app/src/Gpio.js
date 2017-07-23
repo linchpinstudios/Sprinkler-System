@@ -15,6 +15,7 @@ class Gpio {
       'XIO-P3',
       'XIO-P4',
       'XIO-P5',
+      'XIO-P6',
     ];
 
     this.pins = []

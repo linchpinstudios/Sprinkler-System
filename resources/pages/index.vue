@@ -2,10 +2,13 @@
   <section class="container">
     <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
     <h1 class="title">
-      Universal Vue.js Applications Framework
+      Sprinklers
     </h1>
     <nuxt-link class="button" to="/about">
       About page
+    </nuxt-link>
+    <nuxt-link class="button" to="/sprinklers">
+      Sprinklers
     </nuxt-link>
   </section>
 </template>

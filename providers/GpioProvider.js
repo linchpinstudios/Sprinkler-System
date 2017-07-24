@@ -7,7 +7,7 @@ class GpioProvider extends ServiceProvider {
   * register () {
     this.app.singleton('Adonis/Src/Gpio', function (app) {
       const Gpio = require('../app/src/Gpio')
-      return new Gpio
+      return new Gpio()
     })
   }
 }

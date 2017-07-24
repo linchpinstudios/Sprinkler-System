@@ -41,5 +41,17 @@ module.exports = {
   /*
   ** Point to resources
   */
-  srcDir: resolve(__dirname, '..', 'resources')
+  srcDir: resolve(__dirname, '..', 'resources'),
+  build: {
+    loaders: [
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000, // 10KO
+          name: 'img/[name].[hash].[ext]'
+        }
+      }
+    ]
+  }
 }

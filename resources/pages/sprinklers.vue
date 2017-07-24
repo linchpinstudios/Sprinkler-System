@@ -4,7 +4,7 @@
       img(src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo")
     h1.title Sprinklers
     .sprinklers
-      Sprinkler(v-for="sprinkler in sprinklers" :sprinkler="sprinkler")
+      Sprinkler(v-for="sprinkler in sprinklers" :key="sprinkler.id" :sprinkler="sprinkler")
 </template>
 
 <script>

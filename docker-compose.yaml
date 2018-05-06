@@ -1,0 +1,26 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - 3000:80
+    links:
+      - mysql:mysql
+    networks:
+      - web_mysql_net
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - web_mysql_net
+
+volumes:
+  mysql_data:
+
+networks:
+  web_mysql_net:
+    driver: bridge

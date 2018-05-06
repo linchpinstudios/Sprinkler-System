@@ -17,7 +17,7 @@
 
 const Route = use('Route')
 
-Route.group('API', function() {
+Route.group('API', function () {
   Route.get('sprinklers', 'Api/SprinklersController.index')
   Route.get('sprinklers/:id/start', 'Api/SprinklersController.start')
   Route.get('sprinklers/:id/status', 'Api/SprinklersController.status')

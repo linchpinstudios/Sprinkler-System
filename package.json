@@ -24,6 +24,7 @@
     "adonis-middleware": "^1.0.10",
     "adonis-scheduler": "^2.1.2",
     "adonis-websocket": "^1.0.2",
+    "ajv": "^6.4.0",
     "axios": "^0.16.2",
     "chip-gpio": "^1.1.2",
     "chip-io": "^2.1.1",
